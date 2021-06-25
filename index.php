@@ -25,13 +25,6 @@ class Movie
         $this->time = $time;
         $this->img = $img;
 
-       if ($time < 150) {
-           return $this->time = $time . ' film breve';
-       }else{
-           return $this->time;
-       }
-    
-
     }
 
     public function getTitle(){
@@ -49,9 +42,15 @@ class Movie
     public function getImg(){
         return $this->img;
     }
+
+    public function setTime(int $time){
+        return $this->time = $time;
+    }
     
 
 }
+
+
 
 $movies = array(
     new Movie('Ritorno al Futuro', 'fantascienza',1985,130,"https://picsum.photos/200"),
@@ -59,7 +58,7 @@ $movies = array(
     new Movie('Constantine', 'azione',2005,90,"https://picsum.photos/200"),
     new Movie('Il signore degli anelli', 'fantasy',2001,180,"https://picsum.photos/200"),
 );
-//var_dump($movies);
+
 
 ?>
 
@@ -74,8 +73,7 @@ $movies = array(
 <body>
     <div class="movie">
     <?php foreach ($movies as $movie) : ?>
-<!--         <img src="https://picsum.photos/200" alt="">
- -->        <img src=<?php $movie->getImg(); ?> alt=" immagine">
+        <img src="<?php echo $movie->getImg(); ?>" alt=" immagine">
         <div>
             <h2>Titolo: <?php echo $movie->getTitle(); ?></h2>
             <h4>Genere: <?php echo $movie->getGenre(); ?></h4>
