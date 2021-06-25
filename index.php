@@ -17,13 +17,21 @@ class Movie
     public $time;
     public $img;
 
-    function __construct(string $title, string $genre, float $year, float $time, string $img = 'https://picsum.photos/200') {
+    function __construct(string $title, string $genre, float $year, float $time, string $img) {
 
         $this->title = $title;
         $this->genre = $genre;
         $this->year = $year;
         $this->time = $time;
         $this->img = $img;
+
+       if ($time < 150) {
+           return $this->time = $time . ' film breve';
+       }else{
+           return $this->time;
+       }
+    
+
     }
 
     public function getTitle(){
@@ -43,20 +51,13 @@ class Movie
     }
     
 
-    public function setTime($time){
-       if ($time < 150) {
-           return $this->time = $this->$time . 'film breve';
-       }else{
-           return $this->time;
-       }
-    }
 }
 
 $movies = array(
-    new Movie('Ritorno al Futuro', 'fantascienza',1985,130),
-    new Movie('Avatar', 'fantascienza',2009,160),
-    new Movie('Constantine', 'azione',2005,90),
-    new Movie('Il signore degli anelli', 'fantasy',2001,180),
+    new Movie('Ritorno al Futuro', 'fantascienza',1985,130,"https://picsum.photos/200"),
+    new Movie('Avatar', 'fantascienza',2009,160,"https://picsum.photos/200"),
+    new Movie('Constantine', 'azione',2005,90,"https://picsum.photos/200"),
+    new Movie('Il signore degli anelli', 'fantasy',2001,180,"https://picsum.photos/200"),
 );
 //var_dump($movies);
 
@@ -73,12 +74,13 @@ $movies = array(
 <body>
     <div class="movie">
     <?php foreach ($movies as $movie) : ?>
-        <img src="<?php $movie->getImg(); ?>" alt="">
+<!--         <img src="https://picsum.photos/200" alt="">
+ -->        <img src=<?php $movie->getImg(); ?> alt=" immagine">
         <div>
             <h2>Titolo: <?php echo $movie->getTitle(); ?></h2>
             <h4>Genere: <?php echo $movie->getGenre(); ?></h4>
             <p>Anno di uscita: <?php echo $movie->getYear(); ?></p>
-            <p>Durata: <?php echo $movie->getTime(); ?> minuti</p>
+            <p>Durata Minuti: <?php echo $movie->getTime(); ?> </p>
         </div>
         <hr>
     <?php endforeach ?>    
