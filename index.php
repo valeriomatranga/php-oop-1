@@ -17,7 +17,7 @@ class Movie
     public $time;
     public $img;
 
-    function __construct(string $title, string $genre, float $year, float $time, string $img = 'https://picsum.photos/300') {
+    function __construct(string $title, string $genre, float $year, float $time, string $img = 'https://picsum.photos/200') {
 
         $this->title = $title;
         $this->genre = $genre;
@@ -45,15 +45,20 @@ class Movie
 
     public function setTime($time){
        if ($time < 150) {
-           $this->time = $time . 'film breve';
+           return $this->time = $this->$time . 'film breve';
+       }else{
+           return $this->time;
        }
     }
 }
-$movies = new Movie('Ritorno al Futuro', 'fantascienza',1985,130);
-$movies = new Movie('Avatar', 'fantascienza',2009,160);
-$movies = new Movie('Constantine', 'azione',2005,90);
-$movies = new Movie('Il signore degli anelli', 'fantasy',2001,180);
-var_dump($movies);
+
+$movies = array(
+    new Movie('Ritorno al Futuro', 'fantascienza',1985,130),
+    new Movie('Avatar', 'fantascienza',2009,160),
+    new Movie('Constantine', 'azione',2005,90),
+    new Movie('Il signore degli anelli', 'fantasy',2001,180),
+);
+//var_dump($movies);
 
 ?>
 
@@ -68,13 +73,14 @@ var_dump($movies);
 <body>
     <div class="movie">
     <?php foreach ($movies as $movie) : ?>
-        <img src="<?php $movies->getImg(); ?>" alt="">
+        <img src="<?php $movie->getImg(); ?>" alt="">
         <div>
-            <h2>Titolo: <?php echo $movies->getTitle(); ?></h2>
-            <h4>Genere: <?php echo $movies->getGenre(); ?></h4>
-            <p>Anno di uscita: <?php echo $movies->getYear(); ?></p>
-            <p>Durata: <?php echo $movies->getTime(); ?> minuti</p>
+            <h2>Titolo: <?php echo $movie->getTitle(); ?></h2>
+            <h4>Genere: <?php echo $movie->getGenre(); ?></h4>
+            <p>Anno di uscita: <?php echo $movie->getYear(); ?></p>
+            <p>Durata: <?php echo $movie->getTime(); ?> minuti</p>
         </div>
+        <hr>
     <?php endforeach ?>    
     </div>
 </body>
