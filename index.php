@@ -17,7 +17,7 @@ class Movie
     public $time;
     public $img;
 
-    function __construct(string $title, string $genre, string $year, float $time, string $img) {
+    function __construct(string $title, string $genre, float $year, float $time, string $img = 'https://picsum.photos/300') {
 
         $this->title = $title;
         $this->genre = $genre;
@@ -25,7 +25,35 @@ class Movie
         $this->time = $time;
         $this->img = $img;
     }
+
+    public function getTitle(){
+        return $this->title;
+    }
+    public function getGenre(){
+        return $this->genre;
+    }
+    public function getYear(){
+        return $this->year;
+    }
+    public function getTime(){
+        return $this->time;
+    }
+    public function getImg(){
+        return $this->img;
+    }
+    
+
+    public function setTime($time){
+       if ($time < 150) {
+           $this->time = $time . 'film breve';
+       }
+    }
 }
+$movies = new Movie('Ritorno al Futuro', 'fantascienza',1985,130);
+$movies = new Movie('Avatar', 'fantascienza',2009,160);
+$movies = new Movie('Constantine', 'azione',2005,90);
+$movies = new Movie('Il signore degli anelli', 'fantasy',2001,180);
+var_dump($movies);
 
 ?>
 
@@ -38,6 +66,16 @@ class Movie
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="movie">
+    <?php foreach ($movies as $movie) : ?>
+        <img src="<?php $movies->getImg(); ?>" alt="">
+        <div>
+            <h2>Titolo: <?php echo $movies->getTitle(); ?></h2>
+            <h4>Genere: <?php echo $movies->getGenre(); ?></h4>
+            <p>Anno di uscita: <?php echo $movies->getYear(); ?></p>
+            <p>Durata: <?php echo $movies->getTime(); ?> minuti</p>
+        </div>
+    <?php endforeach ?>    
+    </div>
 </body>
 </html>
